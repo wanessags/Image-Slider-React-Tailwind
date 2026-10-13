@@ -1,16 +1,28 @@
-# React + Vite
+# WILD / STORIES — Image Slider
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Atividade SPA, React com Vite, Tailwind CSS v4 e Lucide React.
 
-Currently, two official plugins are available:
+## Executar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para conferir a compilação: `npm run build`.
 
-## React Compiler
+## Estrutura
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/App.jsx`: layout principal e hero.
+- `src/components/Background.jsx`: fundo decorativo.
+- `src/components/ImageSlider.jsx`: estado, imagens, troca e teclado.
+- `src/components/SliderControls.jsx`: botões e indicadores.
+- `src/data/slides.js`: cinco objetos com textos e fotos.
+- `public/images`: imagens originais da atividade.
 
-## Expanding the ESLint configuration
+## Funcionamento
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Use botões anterior e próximo, indicadores e setas do teclado (← / →). Navegação circular preserva o estado. O efeito visual respeita redução de movimento do sistema.
+
+## Referência
+
+Protótipo: https://www.figma.com/design/M9uYIV5AskfRFf2VgmtYwJ?node-id=10-31
+
+## Evidências da entrega
+
+Preencha: versões de Node/Vite, prints desktop/mobile, testes de borda e lista dos commits semânticos realizados.
