@@ -1,18 +1,25 @@
 
-import { ArrowRight, Search } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Search, X } from 'lucide-react';
 import Background from './components/Background.jsx';
 import ImageSlider from './components/ImageSlider.jsx';
 import ProfileMenu from './components/ProfileMenu.jsx';
 
 export default function App() {
+  const [showAbout, setShowAbout] = useState(false);
+
   const scrollToSlider = () => {
     document.getElementById('explorar')?.scrollIntoView({
       behavior: 'smooth',
+      block: 'center',
     });
   };
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden text-ink">
+    <div
+      id="inicio"
+      className="relative isolate min-h-screen overflow-hidden text-ink"
+    >
       <Background />
 
       <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
@@ -29,19 +36,21 @@ export default function App() {
               aria-label="Navegação principal"
               className="hidden items-center gap-8 text-sm font-medium sm:flex"
             >
-              <a
-                href="#explorar"
+              <button
+                type="button"
+                onClick={scrollToSlider}
                 className="border-b-2 border-mauve pb-2 text-ink transition hover:text-mauve"
               >
                 Explorar
-              </a>
+              </button>
 
-              <a
-                href="#sobre"
+              <button
+                type="button"
+                onClick={() => setShowAbout(true)}
                 className="pb-2 text-slate-500 transition hover:text-mauve"
               >
                 Sobre
-              </a>
+              </button>
             </nav>
 
             <button
@@ -57,12 +66,8 @@ export default function App() {
           </div>
         </header>
 
-        <main
-          id="inicio"
-          className="grid min-h-[calc(100vh-105px)] gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-12"
-        >
+        <main className="grid min-h-[calc(100vh-105px)] gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-12">
           <section
-            id="sobre"
             aria-label="Apresentação"
             className="space-y-7"
           >
@@ -97,11 +102,61 @@ export default function App() {
             </button>
           </section>
 
-          <section id="explorar" aria-label="Explorar espécies">
+          <section
+            id="explorar"
+            aria-label="Explorar espécies"
+            className="min-w-0 scroll-mt-8"
+          >
             <ImageSlider />
           </section>
         </main>
       </div>
+
+      {/* Janela discreta de informações */}
+      {showAbout && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5"
+          onClick={() => setShowAbout(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="about-title"
+            className="relative w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowAbout(false)}
+              aria-label="Fechar informações"
+              className="absolute right-5 top-5 rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"
+            >
+              <X size={20} />
+            </button>
+
+            <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-mauve">
+              SOBRE O PROJETO
+            </p>
+
+            <h2
+              id="about-title"
+              className="font-serif text-3xl font-bold text-ink"
+            >
+              Wild Stories
+            </h2>
+
+            <p className="mt-5 text-sm leading-7 text-slate-500">
+              Uma experiência interativa para explorar a
+              vida selvagem através de imagens e curiosidades
+              sobre diferentes espécies de animais.
+            </p>
+
+            <div className="mt-7 border-t border-slate-100 pt-5 text-xs text-slate-400">
+              Desenvolvido com React, Tailwind CSS e JavaScript.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
